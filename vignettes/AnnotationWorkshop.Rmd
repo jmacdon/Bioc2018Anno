@@ -37,7 +37,7 @@ ul > li:before {
 
 ```{r setup, include = FALSE, warning = FALSE}
 
-library(BiocAnno2017)
+library(Bioc2018Anno)
 library(hugene20sttranscriptcluster.db)
 library(EnsDb.Mmusculus.v79)
 library(org.Hs.eg.db)
@@ -76,7 +76,7 @@ The end result might be as simple as a data.frame or HTML table, or as complex a
 
 ```{r, warning = FALSE}
 
-load(system.file("extdata/eset.Rdata", package = "BiocAnno2017"))
+load(system.file("extdata/eset.Rdata", package = "Bioc2018Anno"))
 eset
 
 ```
