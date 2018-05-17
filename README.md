@@ -1,3 +1,4 @@
-# BiocAnno2017
 
-A repository for the annotation workshop at BioC2017
+# BiocAnno2018
+
+A repository for the annotation workshop at BioC2018
