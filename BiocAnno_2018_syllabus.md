@@ -2,8 +2,8 @@
 
 # Instructors
 
-James W. MacDonald (jmacdon@uw.edu)
-Lori Shepherd (lori.shepherd@roswellpark.org)
+* James W. MacDonald (jmacdon@uw.edu)
+* Lori Shepherd (lori.shepherd@roswellpark.org)
 
 # Workshop Description
 
