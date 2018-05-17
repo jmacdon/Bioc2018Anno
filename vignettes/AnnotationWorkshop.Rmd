@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Bioconductor Annotation Resources"
-author: "James W. MacDonald"
-date: 26 June | Bioc 2017
+author: "James W. MacDonald and Lori Shepherd"
+date: 25-27 July | Bioc 2018
 output:
   ioslides_presentation:
     fig_retina: null
