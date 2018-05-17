@@ -1,25 +1,25 @@
-\name{BiocAnno2017-package}
-\alias{BiocAnno2017-package}
-\alias{BiocAnno2017}
+\name{Bioc2018Anno-package}
+\alias{Bioc2018Anno-package}
+\alias{Bioc2018Anno}
 \docType{package}
 \title{
-\packageTitle{BiocAnno2017}
+\packageTitle{Bioc2018Anno}
 }
 \description{
-\packageDescription{BiocAnno2017}
+\packageDescription{Bioc2018Anno}
 }
 \details{
 
 The DESCRIPTION file:
-\packageDESCRIPTION{BiocAnno2017}
-\packageIndices{BiocAnno2017}
+\packageDESCRIPTION{Bioc2018Anno}
+\packageIndices{Bioc2018Anno}
 ~~ An overview of how to use the package, including the most important ~~
 ~~ functions ~~
 }
 \author{
-\packageAuthor{BiocAnno2017}
+\packageAuthor{Bioc2018Anno}
 
-Maintainer: \packageMaintainer{BiocAnno2017}
+Maintainer: \packageMaintainer{Bioc2018Anno}
 }
 
 \keyword{ package }
