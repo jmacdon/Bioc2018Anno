@@ -11,7 +11,7 @@ vignette: >
   %\VignetteIndexEntry{Introduction to Bioconductor Annotation Resources}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  
+
 ---
 
 <style scoped>
@@ -46,7 +46,7 @@ library(Homo.sapiens)
 library(BSgenome)
 library(BSgenome.Hsapiens.UCSC.hg19)
 library(AnnotationHub)
-
+library(Organism.dplyr)
 
 ```
 
@@ -125,8 +125,8 @@ head(pData(featureData(eset)))
 ```{r, results = "asis", echo = FALSE, warning = FALSE}
 
 df <- data.frame("Package type" = c("ChipDb","OrgDb","TxDb/EnsDb","OrganismDb","BSgenome","Others","AnnotationHub","biomaRt"),
-                 Example = c("hugene20sttranscriptcluster.db","org.Hs.eg.db","TxDb.Hsapiens.UCSC.hg19.knownGene; EnsDb.Hsapiens.v75",
-                             "Homo.sapiens","BSgenome.Hsapiens.UCSC.hg19","GO.db; KEGG.db", "Online resource","Online resource"), check.names = FALSE)
+		 Example = c("hugene20sttranscriptcluster.db","org.Hs.eg.db","TxDb.Hsapiens.UCSC.hg19.knownGene; EnsDb.Hsapiens.v75",
+			     "Homo.sapiens","BSgenome.Hsapiens.UCSC.hg19","GO.db; KEGG.db", "Online resource","Online resource"), check.names = FALSE)
 knitr::kable(df)
 
 ```
@@ -285,9 +285,9 @@ TxDb.Athaliana.BioMart.plantsmart22
 EnsDb packages are similar to TxDb packages, but based on Ensembl
 mappings
 
-EnsDb.Hsapiens.v79  
-EnsDb.Mmusculus.v79  
-EnsDb.Rnorvegicus.v79  
+EnsDb.Hsapiens.v79
+EnsDb.Mmusculus.v79
+EnsDb.Rnorvegicus.v79
 
 ## Transcript packages
 
@@ -371,6 +371,12 @@ annotations are GRanges, so you can subset by genomic locations:
 
 <img src="subset.png", style="width: 800px;"/>
 
+SummarizedExperiment objects are popular objects for representing expression
+data and other rectangular data (feature x sample data). Incoming packages are
+now strongly recommended to use this class representation instead of
+ExpressionSet.
+
+
 ## TxDb exercises
 
 * How many transcripts does PPARG have, according to UCSC?
@@ -420,6 +426,53 @@ head(genes(Homo.sapiens, columns = c("ENTREZID","ALIAS","UNIPROT")),4)
 
 * Get all the transcripts from the hg19 genome build, along with their
   Ensembl gene ID, UCSC transcript ID and gene symbol
+
+## Organism.dplyr package
+
+* Combines the data from TxDb and Org.Db associated packages into local database.
+
+* Allows functions from both _org.\*_ and _TxDb.\*_
+    - `keytypes()`, `select()`, ...
+    - `exons()`, `promoters()`, ...
+
+* Allows for filtering and display of combined TxDb and Org.Db information
+  through `dplyr` functions.
+
+```{r, warning = FALSE}
+library(Organism.dplyr)
+
+# src = src_organism("TxDb.Hsapiens.UCSC.hg19.knownGene")
+src <- src_organism(dbpath = hg38light())
+src
+```
+
+## Organism.dply example
+
+```{r, warning = FALSE, eval=FALSE}
+# TxTb function
+promoters(src)
+
+# see a table in database
+tbl(src, "id")
+
+# information from two tables 
+inner_join(tbl(src, "id"), tbl(src, "ranges_gene")) %>%
+		    filter(symbol %in% c("ADA", "NAT2")) %>%
+		    dplyr::select(gene_chrom, gene_start, gene_end,
+		    gene_strand, symbol, alias, map)
+```
+
+## Organism.dplyr exercises
+
+* How many supported organisms are implemented in Organism.dplyr?
+
+* Display the ensembl Id and genename description for symbol "NAT2".
+
+* Show all the alias for "NAT2" in the database.
+
+* Display Gene ontology (GO) information for gene symbol “NAT2”.
+
+
 
 ## BSgenome packages
 
@@ -655,4 +708,3 @@ getBM(c("affy_hg_u95av2", "hgnc_symbol"), c("affy_hg_u95av2"), afyids, mart)
 * Get the Ensembl gene IDs and HUGO symbol for Entrez Gene IDs 672, 5468 and 7157
 
 * What do you get if you query for the 'gene_exon' for GAPDH?
-
